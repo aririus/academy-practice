@@ -6,7 +6,7 @@ def age_input
   age = nil
   loop do
     age = gets.to_i
-    break if age > 0 || age == -1
+    break if age.positive? || age == -1
     puts "Incorrect data. Try again."
   end
   age
@@ -15,7 +15,7 @@ end
 def search_file(file_data, age)
   index = 0
   while index < file_data.length
-    student_age = (file_data[index][-2] + file_data[index][-1]).to_i
+    student_age = file_data[index][-2..].to_i
     if age == student_age
       File.write(RESULTS, "#{file_data[index]}\n", mode: "a")
       file_data.delete_at(index)

@@ -7,6 +7,7 @@ describe "search" do
       allow_any_instance_of(Kernel).to receive(:gets).and_return("-1\n")
       expected_output = "Enter age. Enter '-1' for the program to end.\n"
       expect { main }.to output(expected_output).to_stdout
+      expect(File.read("results.txt")).to eq("")
     end
   end
 
@@ -17,8 +18,10 @@ describe "search" do
       expected_output += "Incorrect data. Try again.\n"
       expected_output += "Search completed!\n"
       expected_output += "Enter age. Enter '-1' for the program to end.\n"
-      expected_output += "Harry Potter 18\nPaddington Bear 18\nTom Sawyer 18\n"
+      results_list = "Harry Potter 18\nPaddington Bear 18\nTom Sawyer 18\n"
+      expected_output += results_list
       expect { main }.to output(expected_output).to_stdout
+      expect(File.read("results.txt")).to eq(results_list)
     end
   end
 
