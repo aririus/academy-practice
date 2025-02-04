@@ -13,7 +13,7 @@ def deposit(balance)
   amount = nil
   loop do
     amount = gets.to_f
-    break if amount > 0
+    break if amount.positive?
     puts "The amount of money for a deposit must be over 0. Try again."
   end
 
@@ -43,12 +43,12 @@ def withdraw(balance)
 end
 
 def balance_screen(balance)
-  puts "Your balance: " + balance.to_s
+  puts "Your balance: #{balance}"
   puts
 end
 
 def main
-  File.exist?("balance.txt") ? balance = File.read("balance.txt").to_f : balance = 100.0
+  balance = File.exist?('balance.txt') ? File.read('balance.txt').to_f : 100.0
 
   puts "Welcome to your bank account management!"
   menu
@@ -67,7 +67,7 @@ def main
       break
     else
       puts "Unknown operation. Choose an operation from the list."
-      puts
+      menu
     end
   end
   
